@@ -1,1 +1,1 @@
-# Pantry-Manager
+# Pantry-Pal
