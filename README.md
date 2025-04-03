@@ -17,7 +17,7 @@ Healthier Alternatives: Suggests healthier substitutes for ingredients.
 User Authentication: Secure login system for personalized grocery management.
 
 Tech Stack
-Frontend: React Native, Figma (for UI/UX design)
+Frontend: React, Figma (for UI/UX design)
 
 Backend: Node.js, Firebase (Database & Authentication)
 
