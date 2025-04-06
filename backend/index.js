@@ -1,3 +1,4 @@
+const fetch = require("node-fetch");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -48,3 +49,63 @@ app.get("/pantry", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// FETCH API
+
+app.get("/nutrition", async (req, res) => {
+  const food = req.query.food || "1 apple";
+
+  const appId = "28d0d746";
+  const appKey = "506dedc51c3bc1c4271a8f344b1b2904";
+  const userId = "zhangjp";
+
+  const url = `https://api.edamam.com/api/nutrition-data?app_id=${appId}&app_key=${appKey}&ingr=${encodeURIComponent(
+    food
+  )}`;
+
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "GET",
+  //       headers: {},
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`Error: ${response.statusText}`);
+  //     }
+
+  //     const data = await response.json();
+  //     res.json(data);
+  //   } catch (error) {
+  //     console.error("Error fetching nutrition data:", error);
+  //     res.status(500).json({
+  //       error: "Failed to fetch nutrition data",
+  //       details: error.message,
+  //     });
+  //   }
+  // });
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Edamam-Account-User": userId,
+      },
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching nutrition data:", error);
+    res.status(500).json({ error: "Failed to fetch nutrition data" });
+  }
+});
+
+//   try {
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     res.json(data);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Failed to fetch nutrition data" });
+//   }
+// });
