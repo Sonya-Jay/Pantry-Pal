@@ -1,4 +1,6 @@
 const fetch = require("node-fetch");
+const cors = require("cors");
+app.use(cors());
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -13,9 +15,13 @@ app.get("/", (req, res) => {
   res.send("Pantry Manager API is running!");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(5001, "0.0.0.0", () => {
+  console.log("Server is running on port 5001");
 });
+
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
 
 const db = require("./firebase");
 
