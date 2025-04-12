@@ -23,11 +23,9 @@ Backend: Node.js, Firebase (Database & Authentication)
 
 APIs Used:
 
-Recipe & Meal Planning: Spoonacular, Edamam
+Recipe & Meal Planning: Edamam
 
 Food Database & Nutrition: USDA FoodData Central, Nutritionix, Edamam Nutrition API
-
-Barcode Scanning: OpenFoodFacts
 
 Future Enhancements
 AI-powered meal recommendations based on user preferences
