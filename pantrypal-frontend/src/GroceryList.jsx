@@ -1,60 +1,23 @@
-import React, { useEffect, useState } from "react";
+import DeleteGrocery from "./DeleteGrocery";
 
-const GroceryList = () => {
-  const [groceries, setGroceries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Fetch groceries from your Express API using Fetch
-    fetch("http://localhost:5001/pantry") // Your backend URL here
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // Parse JSON from response
-      })
-      .then((data) => {
-        setGroceries(data); // Store the data in state
-        setLoading(false); // Set loading to false once data is fetched
-      })
-      .catch((error) => {
-        setError(error.message); // Set the error state if there’s an error
-        setLoading(false); // Set loading to false when done
-      });
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>; // Show loading text while fetching
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>; // Show error message if something went wrong
-  }
+const GroceryList = ({ groceries, onDelete }) => {
+  if (!groceries || groceries.length === 0) return <div>No groceries yet!</div>;
 
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Pantry Items</h1>
       <ul className="list-disc list-inside">
         {groceries.map((grocery) => (
-          <li key={grocery.id}>
-            {grocery.name} - {grocery.expiration_date}
+          <li key={grocery.id} className="flex justify-between items-center">
+            <span>
+              {grocery.name} - {grocery.expiration_date}
+            </span>
+            <DeleteGrocery groceryId={grocery.id} onDelete={onDelete} />
           </li>
         ))}
       </ul>
     </div>
   );
 };
-//   return (
-//     <div>
-//       <h1>Pantry Items</h1>
-//       <ul>
-//         {groceries.map((grocery) => (
-//           <li key={grocery.id}>{grocery.name} - {grocery.expiration_date}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
 
 export default GroceryList;

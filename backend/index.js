@@ -1,20 +1,24 @@
 const fetch = require("node-fetch");
 require("dotenv").config();
 const express = require("express");
+// const { getFirestore } = require("firebase-admin/firestore");
 const cors = require("cors");
+const groceryRoutes = require("./routes/groceryRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+// const db = getFirestore();
 
 app.use(express.json());
 app.use(cors());
+app.use("/", groceryRoutes); // Use the grocery routes
+const PORT = process.env.PORT || 5001;
 
 app.get("/", (req, res) => {
   res.send("Pantry Manager API is running!");
 });
 
-app.listen(5001, "0.0.0.0", () => {
-  console.log("Server is running on port 5001");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
 const db = require("./firebase");
@@ -47,6 +51,17 @@ app.get("/pantry", async (req, res) => {
     res.json(groceries);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete("/grocery/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.collection("groceries").doc(id).delete();
+    res.status(200).json({ message: "Grocery deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting grocery:", error);
+    res.status(500).json({ error: "Failed to delete grocery." });
   }
 });
 

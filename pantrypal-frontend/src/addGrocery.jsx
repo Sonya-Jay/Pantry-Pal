@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-function AddGrocery() {
+const AddGrocery = ({ onGroceryAdded }) => {
   const [name, setName] = useState("");
   const [expiration, setExpiration] = useState("");
 
@@ -23,16 +23,14 @@ function AddGrocery() {
         body: JSON.stringify(grocery),
       });
 
-      const data = await res.json();
-      console.log("Grocery added:", data);
-      alert("Grocery added successfully!");
+      if (!res.ok) throw new Error("Failed to add grocery");
 
-      // Clear input fields
+      await res.json();
       setName("");
       setExpiration("");
-    } catch (error) {
-      console.error("Error adding grocery:", error);
-      alert("Failed to add grocery.");
+      await onGroceryAdded(); // 🔁 Refresh the list!
+    } catch (err) {
+      console.error("Error adding grocery:", err);
     }
   };
 
@@ -64,95 +62,6 @@ function AddGrocery() {
       </form>
     </div>
   );
-}
+};
 
 export default AddGrocery;
-
-// const Pantry = () => {
-//   const [recipes, setRecipes] = useState([]);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchRecipes = async () => {
-//       try {
-//         const response = await fetch(
-//           "http://localhost:5001/recipes?ingredients=chicken,tomato"
-//         );
-//         const data = await response.json();
-//         setRecipes(data);
-//       } catch (err) {
-//         setError(err.message);
-//       }
-//     };
-
-//     fetchRecipes();
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>Suggested Recipes</h2>
-//       {error && <p>Error: {error}</p>}
-//       <ul>
-//         {recipes.map((recipe, index) => (
-//           <li key={index}>
-//             <a
-//               href={recipe.sourceUrl}
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               {recipe.title}
-//             </a>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Pantry;
-
-// const Pantry = () => {
-//   const [groceries, setGroceries] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     // Fetch groceries from your Express API using Fetch
-//     fetch("http://localhost:5001/pantry")  // Your backend URL here
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         return response.json();  // Parse JSON from response
-//       })
-//       .then((data) => {
-//         setGroceries(data);  // Store the data in state
-//         setLoading(false);  // Set loading to false once data is fetched
-//       })
-//       .catch((error) => {
-//         setError(error.message);  // Set the error state if there’s an error
-//         setLoading(false);  // Set loading to false when done
-//       });
-//   }, []);
-
-//   if (loading) {
-//     return <div>Loading...</div>;  // Show loading text while fetching
-//   }
-
-//   if (error) {
-//     return <div>Error: {error}</div>;  // Show error message if something went wrong
-//   }
-
-//   return (
-//     <div>
-//       <h1>Pantry Items</h1>
-//       <ul>
-//         {groceries.map((grocery) => (
-//           <li key={grocery.id}>{grocery.name} - {grocery.expiration_date}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Pantry;
