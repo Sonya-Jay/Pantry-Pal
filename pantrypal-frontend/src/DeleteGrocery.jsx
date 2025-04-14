@@ -1,5 +1,6 @@
 // DeleteGrocery.jsx
 import React from "react";
+import { Trash2 } from "lucide-react";
 
 const DeleteGrocery = ({ groceryId, onDelete }) => {
   const handleDelete = async () => {
@@ -18,21 +19,17 @@ const DeleteGrocery = ({ groceryId, onDelete }) => {
   return (
     <button
       onClick={handleDelete}
-      className="ml-4 text-white text-sm hover:text-gray-200"
+      className="ml-4 text-white hover:text-gray-200 bg-transparent p-0 m-0 border-none outline-none focus:outline-none"
+      style={{
+        backgroundColor: "transparent",
+        boxShadow: "none",
+        WebkitAppearance: "none",
+      }}
       title="Delete"
     >
-      ❌
+      <Trash2 size={16} />
     </button>
   );
-  //   return (
-  //     <button
-  //       onClick={handleDelete}
-  //       className="ml-4 text-red-600 hover:text-red-800"
-  //       title="Delete"
-  //     >
-  //       ❌
-  //     </button>
-  //   );
 };
 
 export default DeleteGrocery;

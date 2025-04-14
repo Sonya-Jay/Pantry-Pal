@@ -10,7 +10,10 @@ const RecipeSuggestions = ({ groceries }) => {
 
       fetch(`http://localhost:5001/recipes?ingredients=${ingredients}`)
         .then((response) => response.json())
-        .then((data) => setRecipes(data))
+        .then((data) => {
+          console.log("fetched recipes:", data);
+          setRecipes(data);
+        })
         .catch(() => setError("Failed to fetch recipes")); // Just use a simple callback for error handling
     }
   }, [groceries]);
@@ -27,9 +30,11 @@ const RecipeSuggestions = ({ groceries }) => {
           {recipes.map((recipe, index) => (
             <li key={index}>
               <a
-                href={recipe.sourceUrl}
+                href={recipe.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-blue-600 underline hover:test-blue-800"
+                onClick={() => console.log("Clicked recipe:", recipe.sourceUrl)}
               >
                 {recipe.title}
               </a>
