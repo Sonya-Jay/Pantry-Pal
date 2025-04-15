@@ -68,10 +68,10 @@ app.delete("/grocery/:id", async (req, res) => {
 // // FETCH API SPOONACULAR
 
 app.get("/nutrition", async (req, res) => {
-  const food = req.query.food || "1 banana";
+  const food = req.query.name || "1 banana";
   const apiKey = process.env.SPOONACULAR_API_KEY;
 
-  const url = `https://api.spoonacular.com/recipes/parseIngredients?apiKey=${apiKey}`;
+  const url = `https://api.spoonacular.com/recipes/parseIngredients?apiKey=${apiKey}&includeNutrition=true`;
 
   try {
     const response = await fetch(url, {
@@ -86,12 +86,25 @@ app.get("/nutrition", async (req, res) => {
     });
 
     const data = await response.json();
+    console.log(JSON.stringify(data, null, 2));
 
-    if (!response.ok) {
-      throw new Error(data.message || "Unknown Spoonacular error");
+    if (!response.ok || !data.length) {
+      throw new Error(data.message || "No nutrition data found");
     }
 
-    res.json(data);
+    const item = data[0]; // First parsed ingredient
+    const nutrients = item?.nutrition?.nutrients || [];
+
+    const getNutrient = (name) =>
+      nutrients.find((n) => n.name.toLowerCase() === name.toLowerCase())
+        ?.amount || "N/A";
+
+    res.json({
+      calories: getNutrient("Calories"),
+      fat: getNutrient("Fat"),
+      carbs: getNutrient("Carbohydrates"),
+      protein: getNutrient("Protein"),
+    });
   } catch (error) {
     console.error("Error fetching Spoonacular nutrition data:", error);
     res.status(500).json({
@@ -100,6 +113,50 @@ app.get("/nutrition", async (req, res) => {
     });
   }
 });
+//     const data = await response.json();
+//     console.log(JSON.stringify(data, null, 2));
+
+//     if (!Array.isArray(data) || !data.length || !data[0].nutrition) {
+//       return res.status(400).json({ error: "No nutrition data found" });
+//     }
+
+//     const nutrients = data[0].nutrition.nutrients;
+
+//     const getNutrientValue = (name) => {
+//       const item = nutrients.find(
+//         (n) => n.name.toLowerCase() === name.toLowerCase()
+//       );
+//       return item ? `${item.amount} ${item.unit}` : "N/A";
+//     };
+
+//     res.json({
+//       calories: getNutrientValue("Calories"),
+//       fat: getNutrientValue("Fat"),
+//       carbs: getNutrientValue("Carbohydrates"),
+//       protein: getNutrientValue("Protein"),
+//     });
+//   } catch (error) {
+//     console.error("Error fetching Spoonacular nutrition data:", error);
+//     res.status(500).json({
+//       error: "Failed to fetch nutrition data from Spoonacular",
+//       details: error.message,
+//     });
+//   }
+// });
+
+//     if (!response.ok) {
+//       throw new Error(data.message || "Unknown Spoonacular error");
+//     }
+
+//     res.json(data);
+//   } catch (error) {
+//     console.error("Error fetching Spoonacular nutrition data:", error);
+//     res.status(500).json({
+//       error: "Failed to fetch nutrition data from Spoonacular",
+//       details: error.message,
+//     });
+//   }
+// });
 
 // FETCH API SPOONACULAR RECIPES WITH LINKS
 
