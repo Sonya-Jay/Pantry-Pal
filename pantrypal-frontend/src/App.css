@@ -1,9 +1,8 @@
 #root {
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 .logo {
@@ -40,4 +39,37 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0b5511;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between; /* space out the two columns */
+  width: 100%;
+  margin-top: 6rem; /* push the columns down so they don't overlap the header */
+}
+
+.leftColumn {
+  width: 48%; /* adjust as needed */
+  padding-right: 1rem;
+  text-align: left;
+}
+
+.rightColumn {
+  width: 48%; /* adjust as needed */
+  padding-left: 1rem;
+  text-align: left;
 }
