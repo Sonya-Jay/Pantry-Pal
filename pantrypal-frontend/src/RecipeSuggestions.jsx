@@ -23,8 +23,8 @@ const RecipeSuggestions = ({ groceries }) => {
   }
 
   return (
-    <div>
-      <h2>Suggested Recipes</h2>
+    <div className="p-4">
+      <h2 className="text-xl font-semibold mb-4">Suggested Recipes</h2>
       {recipes.length > 0 ? (
         <ul>
           {recipes.map((recipe, index) => (

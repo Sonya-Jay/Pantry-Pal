@@ -21,7 +21,7 @@ const GroceryList = ({ groceries, onDelete }) => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Pantry Items</h1>
+      <h2 className="text-xl font-semibold mb-4">Pantry Items</h2>
       <ul className="list-disc list-inside">
         {groceries.map((grocery) => (
           <li key={grocery.id} className="flex justify-between items-center">
