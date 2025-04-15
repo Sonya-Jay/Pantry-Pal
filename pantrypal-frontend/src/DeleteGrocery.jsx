@@ -27,7 +27,7 @@ const DeleteGrocery = ({ groceryId, onDelete }) => {
       }}
       title="Delete"
     >
-      <Trash2 size={16} />
+      <Trash2 size={16} color="#0b5511" />
     </button>
   );
 };
