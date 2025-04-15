@@ -19,8 +19,9 @@ const DeleteGrocery = ({ groceryId, onDelete }) => {
   return (
     <button
       onClick={handleDelete}
-      className="ml-4 text-black bg-black hover:bg-gray-800 p-2 rounded focus:outline-none"
+      className="ml-4 text-white hover:text-gray-200 bg-transparent p-0 m-0 border-none outline-none focus:outline-none"
       style={{
+        backgroundColor: "transparent",
         boxShadow: "none",
         WebkitAppearance: "none",
       }}

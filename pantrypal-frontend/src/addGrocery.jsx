@@ -55,7 +55,9 @@ const AddGrocery = ({ onGroceryAdded }) => {
         />
         <button
           type="submit"
-          className="bg-green-600 text-white !important p-2 rounded hover:bg-green-700"
+          style={{ backgroundColor: "#005417", color: "white" }}
+          className="p-2 rounded hover:bg-green-700"
+          //  className="bg-green-600 text-white !important p-2 rounded hover:bg-green-700"
         >
           Add Grocery
         </button>

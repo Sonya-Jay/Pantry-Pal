@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Katibeh&display=swap");
 
 :root {
-  font-family: 'Katibeh, sans-serif';
+  font-family: "Katibeh, sans-serif";
   line-height: 1.5;
   font-weight: 400;
 
@@ -13,8 +13,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-
 }
 
 a {
@@ -39,8 +37,8 @@ body {
 h1 {
   font-size: 5em;
   display: flex;
-  justify-content: center;  /* centers horizontally */
-  align-items: center;      /* centers vertically */
+  justify-content: center; /* centers horizontally */
+  align-items: center; /* centers vertically */
   text-align: center;
 }
 .p-6 {
@@ -52,11 +50,11 @@ h1 {
   margin: 2rem auto; /* center the grid */
 }
 
-.p-4{
+.p-4 {
   min-height: 300px;
   padding: 2rem;
   font-size: 1.25rem;
-  background-color: #a9dbb7;
+  background-color: #78b889;
   border: 1px solid #096421;
   border-radius: 12px;
 }
@@ -81,6 +79,21 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input[type="text"],
+input[type="date"] {
+  background-color: #a9dbb7;
+  border: 1px solid #0b5511; /* Optional: makes the border visible */
+  color: #0b5511; /* Optional: ensures text is readable */
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: #0b5511;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #0b5511;
@@ -93,4 +106,3 @@ button:focus-visible {
     background-color: #096421;
   }
 }
-

@@ -113,50 +113,6 @@ app.get("/nutrition", async (req, res) => {
     });
   }
 });
-//     const data = await response.json();
-//     console.log(JSON.stringify(data, null, 2));
-
-//     if (!Array.isArray(data) || !data.length || !data[0].nutrition) {
-//       return res.status(400).json({ error: "No nutrition data found" });
-//     }
-
-//     const nutrients = data[0].nutrition.nutrients;
-
-//     const getNutrientValue = (name) => {
-//       const item = nutrients.find(
-//         (n) => n.name.toLowerCase() === name.toLowerCase()
-//       );
-//       return item ? `${item.amount} ${item.unit}` : "N/A";
-//     };
-
-//     res.json({
-//       calories: getNutrientValue("Calories"),
-//       fat: getNutrientValue("Fat"),
-//       carbs: getNutrientValue("Carbohydrates"),
-//       protein: getNutrientValue("Protein"),
-//     });
-//   } catch (error) {
-//     console.error("Error fetching Spoonacular nutrition data:", error);
-//     res.status(500).json({
-//       error: "Failed to fetch nutrition data from Spoonacular",
-//       details: error.message,
-//     });
-//   }
-// });
-
-//     if (!response.ok) {
-//       throw new Error(data.message || "Unknown Spoonacular error");
-//     }
-
-//     res.json(data);
-//   } catch (error) {
-//     console.error("Error fetching Spoonacular nutrition data:", error);
-//     res.status(500).json({
-//       error: "Failed to fetch nutrition data from Spoonacular",
-//       details: error.message,
-//     });
-//   }
-// });
 
 // FETCH API SPOONACULAR RECIPES WITH LINKS
 

@@ -72,35 +72,6 @@ const GroceryList = ({ groceries, onDelete }) => {
           </div>
         </div>
       )}
-      {/* {nutrition && (
-        <div
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(5px)",
-          }}
-          className="fixed inset-0 flex justify-center items-center z-50"
-        >
-          <div className="relative bg-white text-black p-6 rounded shadow-lg max-w-md w-full">
-            <button
-              onClick={() => setNutrition(null)}
-              style={{ backgroundColor: "transparent", boxShadow: "none" }}
-              className="absolute top-2 right-2 text-[#0b5511] hover:text-red-500 p-1 rounded-full focus:outline-none"
-              aria-label="Close"
-            >
-              <X size={20} style={{ backgroundColor: "transparent" }} />
-            </button>
-            <h2 className="text-xl font-semibold mb-2">
-              Nutrition Facts for {nutrition.name}
-            </h2>
-            <ul className="list-disc list-inside text-left text-sm">
-              <li>Calories: {nutrition.calories || "N/A"}</li>
-              <li>Protein: {nutrition.protein || "N/A"}</li>
-              <li>Fat: {nutrition.fat || "N/A"}</li>
-              <li>Carbs: {nutrition.carbs || "N/A"}</li>
-            </ul>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
